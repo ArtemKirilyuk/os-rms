@@ -1,0 +1,182 @@
+﻿<form role="form" class="" method="POST" id="newCustomerForm">
+
+    <div class="form-group" id="newCustomerResult">
+        <div class="alert alert-success alert-dismissible" role="alert">Customer created successful</div>
+        <div class="alert alert-danger " role="alert">Oops! something went wrong. Please try again later</div>
+    </div>
+
+    <div class="form-group">
+        <label for="firstname" >First name</label>
+        <input id="firstname" name="firstname" type='text' class="form-control" @*placeholder="Abdul Aziz"*@ value="Abdul Aziz" autocomplete="off" />
+    </div>
+    
+    <div class="form-group">
+        <label for="lastname">Last name</label>
+        <input id="lastname" name="lastname" type='text' class="form-control" @*placeholder="Abdul Salam"*@ value="Abdul Salam" autocomplete="off" />
+    </div>
+    
+    <div class="form-group">
+        <label for="addressline1">Adress line 1</label>
+        <input id="addressline1" name="addressline1" type='text' class="form-control" @*placeholder="85"*@ value="44" autocomplete="off" />
+    </div>
+    
+    <div class="form-group">
+        <label for="addressline2">Adress line 2</label>
+        <input id="addressline2" name="addressline2" type='text' class="form-control" @*placeholder="2nd Street"*@ value="Tavistock Close" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+        <label for="city">City</label>
+        <input id="city" name="city" type='text' class="form-control" @*placeholder="London"*@ autocomplete="off" value="Leeds" />
+    </div>
+
+    <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <input id="postcode" name="postcode" type='text' class="form-control" @*placeholder="NP40 AB"*@ autocomplete="off" value="LS12 4DJ" />
+    </div>
+
+    <div class="form-group">
+        <label for="mobilephone">Mobile phone</label>
+        <input id="mobilephone" name="mobilephone" type='text' class="form-control" @*placeholder="00000000000"*@ autocomplete="off" />
+    </div>
+    
+
+    <div class="form-group">
+        <label for="telephone">Telephone</label>
+        <input id="telephone" name="telephone" type='text' class="form-control" @*placeholder="00000000000"*@ autocomplete="off" value="07522630278" />
+    </div>
+
+    <div class="form-group" id="newCustomerButtons">
+        <button type="submit" class="btn btn-primary" id="btnCreateCustomer">Create customer</button>
+        <button type="button" class="btn btn-link" id="btnResetCreateNewCustomerForm">Reset</button>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+
+    function resetCustomerForm() {
+        $('#newCustomerForm').data('bootstrapValidator').resetForm();
+        $('#newCustomerForm')[0].reset();
+    }
+
+    $(document).ready(function() {
+        $('#newCustomerResult .alert').hide();
+
+        $('#newCustomerForm').submit(function(e) {
+            e.preventDefault();
+        });
+
+        $('#btnResetCreateNewCustomerForm').click(function() {
+            resetCustomerForm();
+        });
+
+        $('#newCustomerForm').bootstrapValidator({
+            excluded: [':disabled'],
+            message: 'This value is not valid',
+            live: 'enabled',
+            submitButtons: '#btnCreateCustomer',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                firstname: {
+                    validators: {
+                        stringLength: {
+                            max: 50,
+                            message: 'First name cannot be more than 50 characters long'
+                        },
+                        notEmpty: {
+                            message: 'First name is required'
+                        }
+                    }
+                },
+                lastname: {
+                    validators: {
+                        stringLength: {
+                            max: 50,
+                            message: 'Last name cannot be more than 50 characters long'
+                        },
+                        notEmpty: {
+                            message: 'Last name is required'
+                        }
+                    }
+                },
+                addressline1: {
+                    validators: {
+                        stringLength: {
+                            max: 100,
+                            message: 'Address line 1 cannot be more than 100 characters long'
+                        },
+                        notEmpty: {
+                            message: 'Address line 1 is required'
+                        }
+                    }
+                },
+                addressline2: {
+                    validators: {
+                        stringLength: {
+                            max: 100,
+                            message: 'Address line 2 cannot be more than 100 characters long'
+                        },
+                        notEmpty: {
+                            message: 'Address line 2 is required'
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        stringLength: {
+                            max: 100,
+                            message: 'City cannot be more than 100 characters long'
+                        },
+                        notEmpty: {
+                            message: 'City is required'
+                        }
+                    }
+                },
+                postcode: {
+                    validators: {
+                        zipCode: {
+                            country: 'GB',
+                            message: 'Please enter a valid postcode'
+                        },
+                        notEmpty: {
+                            message: 'Postcode  is required'
+                        }
+                    }
+                },
+                mobilephone: {
+                    validators: {
+                        integer: {
+                            message: 'Please enter a valid number'
+                        }
+                    }
+                },
+                telephone: {
+                    validators: {
+                        phone: {
+                            country: 'GB',
+                            message: 'Please enter a valid phone number'
+                        }
+                    }
+                }
+            },
+            onSuccess: function(e) {
+                $('#newCustomerResult .alert').hide();
+
+                makeAjaxCall('@Url.Action("AddCustomer", "Customer")', 'POST', function(d) {
+                    resetCustomerForm();
+                    $('#newCustomerResult .alert-success').show();
+                }, function(d) {
+                    $('#newCustomerResult .alert-danger').show();
+                }, $('#newCustomerForm').serialize(), true);
+
+            }
+        });
+
+
+    });
+</script>

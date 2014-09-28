@@ -1,0 +1,51 @@
+﻿@model RestaurantSystems.Core.Entities.BookingEntity
+           
+<div id="bookingDetailsContainer">
+    
+    <div>
+
+        <ul id="errorMessageBox"></ul>
+
+        <form id="newBookingForm" action="@Url.Action("UpdateBooking", "Booking")" method="POST" class="form-layout">
+
+            <input type="hidden" id="bookingId" name="bookingId" value="@Model.Id" />
+
+            <ol>
+                <li>
+                    <label for='from'>From</label>
+                    <input id='from' class="date" name="from" type='text' required value="@Model.From.ToString("dd/MM/yyyy HH:mm")">
+                </li>
+                <li>
+                    <label for='till'>Till</label>
+                    <input id='till' class="date" name='till' type='text' required value="@Model.Till.ToString("dd/MM/yyyy HH:mm")">
+                </li>
+
+                <li>
+                    <label for="customer">Customer</label>
+                    <input id="customer" type="text" class="width200px" readonly value="@Model.CustomerName" />
+                </li>
+
+                <li>
+                    <label for="tableFor">Table for</label>
+                    <input id="tableFor" type="text" class="width100px" name="tableFor" autofocus value="@Model.TableFor" />
+                </li>
+
+
+            </ol>
+        </form>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.date').datetimepicker({
+                //lang: 'en',
+                //mask: true,
+                //format: 'd/m/Y H:i',
+                //minDate: '-1970/01/02',
+                //maxDate: '+1970/01/10'
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>@ViewBag.Title - AARMS</title>
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/modernizr")
+        
+        @Scripts.Render("~/bundles/bootstrap")
+        @Styles.Render("~/Content/bootstrap")
+        
+        @Styles.Render("~/Content/css")
+        
+        @Styles.Render("~/Content/bootstrapdatetimepicker")
+        @Scripts.Render("~/bundles/bootstrapdatetimepicker")
+
+
+        @Styles.Render("~/Content/bootstrapvalidator")
+        @Scripts.Render("~/bundles/bootstrapvalidator")
+        
+        
+        @Scripts.Render("~/bundles/app")
+    </head>
+
+    <body>
+        
+        <div class="container">
+
+            <!-- Static navbar -->
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                @Html.Partial("_MainMenu")
+            </div>
+
+        </div> <!-- menu container--> 
+
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="container" id="bodyMainContainer">
+            
+            <h3>
+                @ViewBag.Title
+                <small>@ViewBag.SecondTitle</small>
+            </h3>
+            
+            <hr/>
+            <br/>
+            
+            @RenderBody()
+            <hr />
+            
+            
+            <div class="modal fade" id="bodyModalContainer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="bodyModalTitle"></h4>
+                        </div>
+
+                        <div class="modal-body" id="bodyModalBody"></div>
+
+                        <div class="modal-footer" id="bodyModalFooter">
+
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            
+            
+        </div>
+        
+        
+        <div class=" container">
+            <footer>
+                <div class="row">
+                    <div class="col-md-9">
+                        &copy; July 2014 - @DateTime.Now.Year, Abdul Aziz Abdul Salam    
+                    </div>
+                    <div class="col-md-3 text-right">
+                        @Html.ActionLink("About", "About", "Home")
+                        @Html.ActionLink("Contact", "Contact", "Home")    
+                    </div>
+                </div>
+
+            </footer>
+        </div>
+
+        
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-info" style="width: 20%">
+                <span class="sr-only">20% Complete</span>
+            </div>
+        </div>
+        
+        <style type="text/css">
+            .progress { display: none; }
+        </style>
+
+        <!-- Placed at the end of the document so the pages load faster -->
+        @Html.Partial("_ProgressBar")
+        @Html.Partial("_Error")
+        
+        
+        @RenderSection("scripts", false)
+    </body>
+</html>

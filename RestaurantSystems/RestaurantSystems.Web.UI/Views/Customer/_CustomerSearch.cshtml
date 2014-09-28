@@ -1,0 +1,45 @@
+﻿
+<form role="form" method="POST" class="form-inline" id="newCustomerSearchForm">
+
+    <div class="input-group">
+        <input type="text" class="form-control" id="customerSearchTxt" name="customer" placeholder="Customer name" />
+        <span class="input-group-btn">
+            <button id="btnCustomerSearch" class="btn  btn-primary" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+
+
+</form>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#newCustomerSearchForm').submit(function (e) {
+            e.preventDefault();
+        });
+
+        $('#btnCustomerSearch').click(function () {
+
+            var qry = $('#customerSearchTxt').val();
+
+            if (qry === null || qry === '') {
+                return;
+            }
+
+            makeAjaxCall('@Url.Action("SearchCustomer", "Customer")', 'GET', function(d) {
+                $('#customerSearchResult').html(d);
+            }, function(d) {
+                $('#newCustomerResult .alert-danger').show();
+            }, {
+                query: qry
+            });
+
+            
+        });
+    });
+
+</script>

@@ -1,0 +1,187 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.ProductEntity>
+
+@{
+    if (Model == null)
+    {
+        return;
+    }
+
+    var group = Model.GroupBy(x => new { x.Category, x.CategoryId }, (cat, prod) => new { Id = cat.CategoryId, Name = cat.Category, Products = prod.ToList() });
+}
+
+<div class="row product-group">
+
+    @foreach (var cat in group)
+    {
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    @cat.Name
+                </div>
+
+                <div class="panel-body">
+                    <div class="left">Products: @cat.Products.Count</div>
+                    <div class="right">
+                        <button type="button" data-id="@cat.Id" class="product-add btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="list-group">
+                    @foreach (var prod in cat.Products)
+                    {
+                        <div class="list-group-item" data-id="@prod.Id" data-cat-id="@cat.Id">
+                            
+                            <div class="left">
+                                @if (prod.Image == null)
+                                {
+                                    <img src="@Url.Content("~/Content/Image/blank_20_20.png")" alt="Product - @prod.LongName" class="img-circle img">
+                                }
+                                else
+                                {
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(prod.Image));
+                                    <img src="@imgSrc" alt="Product - @prod.LongName" class="img-rounded img">
+                                }
+                                
+                                @if (prod.Deleted)
+                                {
+                                    @prod.LongName    
+                                    <span class="label label-warning">Deleted</span>
+                                }
+                                else
+                                {
+                                    <a href="" class="product @(prod.Deleted ? "disabled" : string.Empty)">@prod.LongName</a>
+                                }
+                            </div>
+                            <div class="right">
+                                @if (!prod.Deleted)
+                                {
+                                    <button type="button" class="product-remove btn btn-default btn-xs ">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                }
+                            </div>
+
+                            
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="modal fade" id="productModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Product</h4>
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="productSave">Save</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#productSave').click(function() {
+            $('.modal-body form').submit();
+        });
+
+        $('.product-group a.product').click(function(e) {
+            e.preventDefault();
+
+            // EDIT - PRODUCT
+            var id = $(this).parent().parent().attr('data-id');
+
+            $.ajax({
+                url: '@Url.Action("ProductForm", "Product")?productId=' + id,
+                type: 'GET',
+                success: function (d) {
+                    $('.modal-body').html(d);
+                    $('.modal-title').html('Edit product');
+                    $('#productModal').modal();
+                },
+                fail: function (d) {
+                    
+                }
+            });
+        });
+
+        $('.product-group button.product-remove').click(function (e) {
+            e.preventDefault();
+            // REMOVE - PRODUCT
+
+            var id = $(this).parent().parent().attr('data-id');
+
+            $.ajax({
+                url: '@Url.Action("DeleteProduct", "Product")?productId=' + id,
+                type: 'POST',
+                success: function (d) {
+                    location.reload();
+                },
+                fail: function (d) {
+
+                }
+            });
+        });
+
+        $('.product-group button.product-add').click(function(e) {
+            e.preventDefault();
+            // ADD - PRODUCT
+
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                url: '@Url.Action("ProductForm", "Product")?productId=0&categoryId=' + id,
+                type: 'GET',
+                success: function(d) {
+                    $('.modal-body').html(d);
+                    $('.modal-title').html('New product');
+                    $('#productModal').modal();
+                },
+                fail: function(d) {
+
+                }
+            });
+        });
+    });
+</script>
+
+<style type="text/css">
+    
+    .img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .left { float: left; }
+
+    .right { float: right; }
+
+    .product-add { }
+
+    .product { }
+
+    .product-remove { }
+</style>

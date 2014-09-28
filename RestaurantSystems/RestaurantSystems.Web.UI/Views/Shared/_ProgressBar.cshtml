@@ -1,0 +1,93 @@
+﻿<!-- Modal -->
+<div class="modal fade global-progress-bar" id="globalProgressBarModal" tabindex="-1" role="dialog" aria-labelledby="globalProgressBarModal" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>*@
+                <h4 class="modal-title" id="globalProgressBarLabel">Loading...</h4>
+            </div>
+
+            <div class="modal-body center-block">
+                <div class="progress">
+                    <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        // Setup
+        $('.global-progress-bar').modal({
+            backdrop: 'static',
+            show: false
+        });
+
+    });
+
+    var secondCount = 800;
+    var incrementDuration = 10;
+    var globalInterval;
+
+    window.DisplayProgress = function(description) {
+
+        // Fix description
+        var desc = description;
+
+        if (desc === null || desc === '') {
+            desc = 'Loading...';
+        }
+
+        // Get all doms
+        var $modal = $('.global-progress-bar'),
+            $bar = $modal.find('.progress-bar'),
+            $title = $modal.find('.modal-title');
+
+        // Set title
+        $title.html(desc);
+
+        // Show modal
+        $modal.modal('show');
+
+        // Start timer
+        globalInterval = setInterval(function () {
+            var currentWidth = $bar.width();
+            var newWidth = currentWidth + incrementDuration;
+
+            if (newWidth > 100) {
+                newWidth = 0;
+            }
+
+            $bar.width(newWidth);
+
+            // console.log('$bar: ' + $bar.width());
+        }, secondCount);
+    };
+
+    window.HideProgress = function() {
+        var $modal = $('.global-progress-bar'),
+            $bar = $modal.find('.progress-bar');
+
+        $modal.modal('hide');
+        $bar.width(0);
+
+        clearInterval(globalInterval);
+    };
+
+
+</script>

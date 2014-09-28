@@ -1,0 +1,48 @@
+﻿@using Microsoft.Owin.Security
+@model RestaurantSystems.Web.UI.Models.ExternalLoginListViewModel
+
+@*<h5>Alternative logins</h5>
+<hr />*@
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Alternative logins</div>
+    <div class="panel-body">
+        @{
+            var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+            var authenticationDescriptions = loginProviders as AuthenticationDescription[] ?? loginProviders.ToArray();
+
+            if (authenticationDescriptions.Any())
+            {
+                using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div id="socialLoginList">
+                        <p>
+                            @foreach (AuthenticationDescription p in authenticationDescriptions)
+                            {
+                                <button type="submit"
+                                        class="btn btn-default"
+                                        id="@p.AuthenticationType"
+                                        name="provider"
+                                        value="@p.AuthenticationType"
+                                        title="Log in using your @p.Caption account">
+                                    @p.AuthenticationType
+                                </button>
+                            }
+                        </p>
+                    </div>
+                }
+            }
+
+        }
+    </div>
+</div>
+
+<style type="text/css">
+    #socialLoginList button {
+        
+    }
+</style>

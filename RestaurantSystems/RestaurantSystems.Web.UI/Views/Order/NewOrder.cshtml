@@ -1,0 +1,147 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.ProductEntity>
+
+@{
+    ViewBag.Title = "Order";
+    ViewBag.SecondTitle = "place new order";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_ProductGroup", Model)
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Partial("_CustomerInformation")
+            </div>
+
+            <div class="col-md-9" id="orderRowsHolder">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //function changeQuantity(id, by) {
+
+    //    var $existingProduct = $('#orderDetails tr[data-prod-id="' + id + '"]');
+
+    //    var quantityElement = $existingProduct.children('.product-quantity');
+    //    var priceElement = $existingProduct.children('.product-price');
+    //    var totalElement = $existingProduct.children('.product-total');
+
+    //    if (quantityElement != null && totalElement != null && priceElement != null) {
+
+    //        var quantity = parseInt(quantityElement.html());
+    //        var newQuantity = quantity + by;
+
+    //        if (newQuantity <= 0) {
+    //            $existingProduct.remove();
+    //        }
+
+    //        quantityElement.html(newQuantity);
+
+    //        var price = priceElement.attr('data-price');
+
+    //        var newPrice = (newQuantity) * price;
+    //        newPrice = Math.round(newPrice * 100) / 100;
+    //        totalElement.html('£ ' + newPrice);
+    //    }
+
+    //    adjustTotal();
+    //}
+
+    //function adjustTotal() {
+        
+    //    var $existingTotal = $('#orderTotals').children('.ord-total');
+
+    //    var totQty = 0;
+    //    var totPrice = 0;
+
+    //    $('#orderDetails tr').each(function () {
+    //        var qty = parseInt($(this).children('.product-quantity').html());
+    //        var price = $(this).children('.product-price').attr('data-price');
+
+    //        var subPrice = Math.round((price * qty) * 100) / 100;
+
+    //        totPrice += subPrice;
+    //        totQty += qty;
+    //    });
+
+    //    totPrice = Math.round(totPrice * 100) / 100;
+
+    //    if ($existingTotal != null && $existingTotal.length > 0) {
+    //        $existingTotal.children('.ord-quantity').html(totQty);
+    //        $existingTotal.children('.ord-total').html('£ ' + totPrice);
+    //    } else {
+    //        var row = '<tr class="ord-total">' +
+    //            '<td></td>' +
+    //            '<td colspan="2">Total</td>' +
+    //            '<td class="ord-quantity">' + totQty + '</td>' +
+    //            '<td class="ord-total">£ ' + totPrice + '</td>' +
+    //            '</tr>';
+
+    //        $('#orderTotals').append(row);
+    //    }
+    //}
+
+    //function rebindQuanityButtons() {
+
+    //    $('.incrementQuantity, .decrementQuantity').unbind();
+
+    //    $('.incrementQuantity, .incrementQuantity span').click(function() {
+    //        var id = $(this).parent('td').parent('tr').attr('data-prod-id');
+    //        changeQuantity(id, 1);
+    //    });
+
+    //    $('.decrementQuantity, .decrementQuantity span').click(function() {
+    //        var id = $(this).parent('td').parent('tr').attr('data-prod-id');
+    //        changeQuantity(id, -1);
+    //    });
+    //}
+
+    //$(document).ready(function() {
+
+    //    $('.product').click(function() {
+    //        var id = $(this).attr('data-prod-id');
+    //        var name = $(this).attr('data-prod-name');
+    //        var price = $(this).attr('data-prod-price');
+
+
+    //        var $existingProduct = $('#orderDetails tr[data-prod-id="' + id + '"]');
+
+    //        if ($existingProduct.val() == null || $existingProduct === 'undefined') {
+    //            var row = '<tr data-prod-id="' + id + '">' +
+    //                '<td> ' +
+    //                '<a href="#" class="btn btn-success btn-xs incrementQuantity"><span class="glyphicon glyphicon-plus"></span></a> ' +
+    //                '<a href="#" class="btn btn-danger btn-xs decrementQuantity"><span class="glyphicon glyphicon-minus"></span></a> ' +
+    //                '</td>' +
+    //                '<td>' + name + '</td>' +
+    //                '<td class="product-price" data-price="' + price + '">£ ' + price + '</td>' +
+    //                '<td class="product-quantity">0</td>' +
+    //                '<td class="product-total">£ ' + price + '</td>' +
+    //                '</tr>';
+
+    //            $('#orderDetails').append(row);
+    //            rebindQuanityButtons();
+    //            changeQuantity(id, 1);
+    //        } else {
+    //            changeQuantity(id, 1);
+    //        }
+
+    //    });
+    //});
+
+</script>

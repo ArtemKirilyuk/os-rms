@@ -1,0 +1,154 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07 - BusinessLogic", "07 - BusinessLogic", "{CF14DAC6-241D-4FDF-A9BB-46AA36EE257D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - DataAccess", "04 - DataAccess", "{CE7762CD-0ADA-4AF0-AEC6-7951224D6962}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - CrossCutting", "03 - CrossCutting", "{D48436DA-B164-43FC-89F4-936134E2D8F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Web", "01 - Web", "{45E124E4-BC51-41FA-8128-2A974F2ECE0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Domain", "02 - Domain", "{CE4E1A8A-58AF-4A3A-BFF8-7362D8C833BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Core", "RestaurantSystems.Core\RestaurantSystems.Core.csproj", "{8B884155-08E2-4744-83AA-877BFB2B6015}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Main", "RestaurantSystems.Main\RestaurantSystems.Main.csproj", "{049F64FB-0E5D-4B91-9545-C4B677B3DC2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Logs", "RestaurantSystems.Logs\RestaurantSystems.Logs.csproj", "{02074FB0-1255-4D3D-95BB-0E4E63E222AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.DataAccess", "RestaurantSystems.DataAccess\RestaurantSystems.DataAccess.csproj", "{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - IoC", "05 - IoC", "{CAA701E1-389D-40E2-86C9-31D0C8FD113F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Ioc", "RestaurantSystems.Ioc\RestaurantSystems.Ioc.csproj", "{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08 - Database", "08 - Database", "{A8BA41A4-3EEF-42C9-9D35-944C35FC4198}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Restaurant.Database", "Restaurant.Database\Restaurant.Database.sqlproj", "{F8BB388C-698B-4BB2-996A-A89DC5896B50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Web.UI", "RestaurantSystems.Web.UI\RestaurantSystems.Web.UI.csproj", "{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Core.Exceptions", "RestaurantSystems.Core.Exceptions\RestaurantSystems.Core.Exceptions.csproj", "{71B52C17-ECCA-4514-BE37-1BDB86E19E80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "09 - Tests", "09 - Tests", "{F4173A4C-BA87-4B75-B0A5-62531EC83FE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.DummyTest", "RestaurantSystems.DummyTest\RestaurantSystems.DummyTest.csproj", "{49C4E477-724B-4067-8B0D-DFE615469377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Common", "00 - Common", "{5581F667-ED01-457C-8151-8F93B8AC5A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSystems.Common", "RestaurantSystems.Common\RestaurantSystems.Common.csproj", "{06B3995D-42BB-478C-8E03-5552E6628D5C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://azizaa.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RestaurantSystems.Core\\RestaurantSystems.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = RestaurantSystems.sln
+		SccProjectName1 = RestaurantSystems.Core
+		SccLocalPath1 = RestaurantSystems.Core
+		SccProjectUniqueName2 = RestaurantSystems.Main\\RestaurantSystems.Main.csproj
+		SccProjectTopLevelParentUniqueName2 = RestaurantSystems.sln
+		SccProjectName2 = RestaurantSystems.Main
+		SccLocalPath2 = RestaurantSystems.Main
+		SccProjectUniqueName3 = RestaurantSystems.Logs\\RestaurantSystems.Logs.csproj
+		SccProjectTopLevelParentUniqueName3 = RestaurantSystems.sln
+		SccProjectName3 = RestaurantSystems.Logs
+		SccLocalPath3 = RestaurantSystems.Logs
+		SccProjectUniqueName4 = RestaurantSystems.DataAccess\\RestaurantSystems.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName4 = RestaurantSystems.sln
+		SccProjectName4 = RestaurantSystems.DataAccess
+		SccLocalPath4 = RestaurantSystems.DataAccess
+		SccProjectUniqueName5 = RestaurantSystems.Ioc\\RestaurantSystems.Ioc.csproj
+		SccProjectTopLevelParentUniqueName5 = RestaurantSystems.sln
+		SccProjectName5 = RestaurantSystems.Ioc
+		SccLocalPath5 = RestaurantSystems.Ioc
+		SccProjectUniqueName6 = Restaurant.Database\\Restaurant.Database.sqlproj
+		SccProjectTopLevelParentUniqueName6 = RestaurantSystems.sln
+		SccProjectName6 = Restaurant.Database
+		SccLocalPath6 = Restaurant.Database
+		SccProjectUniqueName7 = RestaurantSystems.Web.UI\\RestaurantSystems.Web.UI.csproj
+		SccProjectTopLevelParentUniqueName7 = RestaurantSystems.sln
+		SccProjectName7 = RestaurantSystems.Web.UI
+		SccLocalPath7 = RestaurantSystems.Web.UI
+		SccProjectUniqueName8 = RestaurantSystems.Core.Exceptions\\RestaurantSystems.Core.Exceptions.csproj
+		SccProjectTopLevelParentUniqueName8 = RestaurantSystems.sln
+		SccProjectName8 = RestaurantSystems.Core.Exceptions
+		SccLocalPath8 = RestaurantSystems.Core.Exceptions
+		SccProjectUniqueName9 = RestaurantSystems.DummyTest\\RestaurantSystems.DummyTest.csproj
+		SccProjectTopLevelParentUniqueName9 = RestaurantSystems.sln
+		SccProjectName9 = RestaurantSystems.DummyTest
+		SccLocalPath9 = RestaurantSystems.DummyTest
+		SccProjectUniqueName10 = RestaurantSystems.Common\\RestaurantSystems.Common.csproj
+		SccProjectTopLevelParentUniqueName10 = RestaurantSystems.sln
+		SccProjectName10 = RestaurantSystems.Common
+		SccLocalPath10 = RestaurantSystems.Common
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B884155-08E2-4744-83AA-877BFB2B6015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B884155-08E2-4744-83AA-877BFB2B6015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B884155-08E2-4744-83AA-877BFB2B6015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B884155-08E2-4744-83AA-877BFB2B6015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049F64FB-0E5D-4B91-9545-C4B677B3DC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049F64FB-0E5D-4B91-9545-C4B677B3DC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049F64FB-0E5D-4B91-9545-C4B677B3DC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049F64FB-0E5D-4B91-9545-C4B677B3DC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02074FB0-1255-4D3D-95BB-0E4E63E222AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02074FB0-1255-4D3D-95BB-0E4E63E222AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02074FB0-1255-4D3D-95BB-0E4E63E222AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02074FB0-1255-4D3D-95BB-0E4E63E222AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B52C17-ECCA-4514-BE37-1BDB86E19E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B52C17-ECCA-4514-BE37-1BDB86E19E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B52C17-ECCA-4514-BE37-1BDB86E19E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B52C17-ECCA-4514-BE37-1BDB86E19E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49C4E477-724B-4067-8B0D-DFE615469377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49C4E477-724B-4067-8B0D-DFE615469377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49C4E477-724B-4067-8B0D-DFE615469377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49C4E477-724B-4067-8B0D-DFE615469377}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B3995D-42BB-478C-8E03-5552E6628D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B3995D-42BB-478C-8E03-5552E6628D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B3995D-42BB-478C-8E03-5552E6628D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B3995D-42BB-478C-8E03-5552E6628D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B884155-08E2-4744-83AA-877BFB2B6015} = {CE4E1A8A-58AF-4A3A-BFF8-7362D8C833BD}
+		{049F64FB-0E5D-4B91-9545-C4B677B3DC2A} = {CF14DAC6-241D-4FDF-A9BB-46AA36EE257D}
+		{02074FB0-1255-4D3D-95BB-0E4E63E222AC} = {D48436DA-B164-43FC-89F4-936134E2D8F1}
+		{83BEFABE-3CD7-4D42-A9DA-E10D19D51E46} = {CE7762CD-0ADA-4AF0-AEC6-7951224D6962}
+		{DC4FBFB8-0D25-474D-B02E-B6D639D6BB9C} = {CAA701E1-389D-40E2-86C9-31D0C8FD113F}
+		{F8BB388C-698B-4BB2-996A-A89DC5896B50} = {A8BA41A4-3EEF-42C9-9D35-944C35FC4198}
+		{7847F10C-F6DD-4C8A-ADCF-E81DE6DEBD05} = {45E124E4-BC51-41FA-8128-2A974F2ECE0D}
+		{71B52C17-ECCA-4514-BE37-1BDB86E19E80} = {CE4E1A8A-58AF-4A3A-BFF8-7362D8C833BD}
+		{49C4E477-724B-4067-8B0D-DFE615469377} = {F4173A4C-BA87-4B75-B0A5-62531EC83FE3}
+		{06B3995D-42BB-478C-8E03-5552E6628D5C} = {5581F667-ED01-457C-8151-8F93B8AC5A8B}
+	EndGlobalSection
+EndGlobal
