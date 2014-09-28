@@ -20,3 +20,5 @@ With a road map to include the following features in the near future.
 5. Documentations
 
 To try this product before using it please follow the link - http://osrms.azurewebsites.net/
+
+<strong>If any developer out there wants to make any changes to the code, please feel free. </strong>
