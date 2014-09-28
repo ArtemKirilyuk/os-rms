@@ -1,0 +1,14 @@
+﻿@model System.Collections.Generic.IEnumerable<RestaurantSystems.Core.Entities.ProductEntity>
+
+@{
+    ViewBag.Title = "Product";
+    ViewBag.SecondTitle = "manage product and categories";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_ProductGroup", Model)
+    </div>
+</div>
+

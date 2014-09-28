@@ -1,0 +1,95 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.OrderHeaderEntity>
+
+
+@{
+    ViewBag.Title = "Order";
+    ViewBag.SecondTitle = "search and print";
+}
+
+
+<div class="row">
+    
+    <div class="col-md-12">
+        
+        <div class="row">
+           
+            <div class="col-md-6">
+                
+                @if (Model == null)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Order search</div>
+                        <div class="panel-body">@Html.Partial("_OrderSearch")</div>
+                    </div>
+                }
+
+                <div class="panel-default panel">
+                    <div class="panel-heading">
+                        Order header
+                    </div>
+
+                    <div class="panel-body" id="divOrderHeader">
+                        @if (Model != null)
+                        {
+                            <text>@Html.Partial("_OrderHeaders", Model)</text>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Order details
+                            </div>
+                            <div class="panel-body" id="divOrderDetails">
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-5 ">
+
+    </div>
+    <div class="col-md-7 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">Order search</div>
+            <div class="panel-body">@Html.Partial("_OrderSearch")</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        
+       
+    </div>
+    
+    <div class="col-md-7" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Order details
+            </div>
+            <div class="panel-body" id="divOrderDetails">
+            </div>
+        </div>
+
+    </div>
+</div>*@

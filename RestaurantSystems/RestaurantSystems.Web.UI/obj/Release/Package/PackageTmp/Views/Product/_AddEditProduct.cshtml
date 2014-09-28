@@ -1,0 +1,79 @@
+﻿@model RestaurantSystems.Core.Entities.ProductEntity
+           
+
+<form role="form" 
+      class="form-horizontal" 
+      method="POST" 
+      id="productForm" 
+      action="@(Model.Id <= 0 ? Url.Action("AddProduct", "Product") : @Url.Action("UpdateProduct", "Product"))" 
+      enctype="multipart/form-data">
+
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+
+    <div class="form-group">
+        <label for="category" class="col-md-3 control-label">Category</label>
+        <div class="col-md-6">
+            <label class="disabled form-control">@Model.Category</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="longName" class="col-md-3 control-label">Long name</label>
+        <div class="col-md-7">
+            <input id="longName" name="longName" value="@Model.LongName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="shortName" class="col-md-3 control-label">Short name</label>
+        <div class="col-md-4">
+            <input id="shortName" name="shortName" value="@Model.ShortName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="price" class="col-md-3 control-label">Price</label>
+        <div class="col-md-3">
+            <input id="price" name="price" value="@Model.Price" class="form-control" />
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="image" class="col-md-3 control-label">Current image</label>
+        <div class="col-md-7">
+            @if (Model.Image == null)
+            {
+                <img src="@Url.Content("~/Content/Image/blank_20_20.png")" alt="Product - @Model.LongName" class="img-thumbnail img128">
+            }
+            else
+            {
+                var imgSrc = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image));
+                <img src="@imgSrc" alt="Product - @Model.LongName" class="img-thumbnail img128">
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="image" class="col-md-3 control-label">Replace with</label>
+        <div class="col-md-7">
+            <input type="file" id="image" name="image">
+            <p class="help-block">Please only use a small image.</p>
+        </div>
+    </div>
+
+
+</form>
+
+<style type="text/css">
+    #productForm {
+        margin-bottom: 10px;
+        margin-left: 50px;
+        margin-top: 10px;
+    }
+
+    .img128 {
+        width: 128px;
+        height: 128px;
+    }
+</style>

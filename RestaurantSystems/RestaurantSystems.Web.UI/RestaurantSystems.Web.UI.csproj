@@ -252,6 +252,7 @@
     <Content Include="Scripts\bootstrapValidator.js" />
     <Content Include="Scripts\Chart.js" />
     <None Include="Properties\PublishProfiles\LOCCAL.pubxml" />
+    <None Include="Properties\PublishProfiles\osrms.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -299,7 +300,6 @@
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

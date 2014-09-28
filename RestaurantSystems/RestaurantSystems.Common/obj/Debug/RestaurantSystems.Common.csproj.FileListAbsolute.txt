@@ -1,0 +1,4 @@
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Common\bin\Debug\RestaurantSystems.Common.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Common\bin\Debug\RestaurantSystems.Common.pdb
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Common\obj\Debug\RestaurantSystems.Common.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Common\obj\Debug\RestaurantSystems.Common.pdb

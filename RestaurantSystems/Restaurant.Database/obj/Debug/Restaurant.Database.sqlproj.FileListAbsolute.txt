@@ -1,0 +1,9 @@
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\bin\Debug\Restaurant.Database.dacpac
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\bin\Debug\Restaurant.Database.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\bin\Debug\Restaurant.Database.pdb
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\Model.xml
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\refactor.xml
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\postdeploy.sql
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\predeploy.sql
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\Restaurant.Database.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\Restaurant.Database\obj\Debug\Restaurant.Database.pdb

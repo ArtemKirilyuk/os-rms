@@ -1,0 +1,17 @@
+﻿@using RestaurantSystems.Core.Entities
+@model IEnumerable<BookingEntity>
+
+@{
+    ViewBag.Title = "Booking";
+    ViewBag.SecondTitle = "Search and new booking";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("_NewBooking")
+    </div>
+    <div class="col-md-9">
+        @Html.Partial("_BookingStructure")
+    </div>
+</div>

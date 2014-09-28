@@ -1,0 +1,148 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        Customer information
+    </div>
+    
+    <div class="panel-body">
+        <form role="form" id="customerInfo">
+            
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="customerId" name="customerId" />
+                
+                <div class="input-group">
+                    @*<input type="text" class="form-control" id="customer" name="customer" autocomplete="off" />*@
+                    <input type="text" class="form-control" id="customer" name="customer" autocomplete="off" placeholder="Search for customer" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="btnAddNewCustomer">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
+
+            </div>
+            
+            <div class="form-group btn-group" id="previousOrdersDiv">
+                <button class="btn btn-default" type="button" id="viewPreviousOrders">
+                    View previous orders <span class="badge" id="numberOfPreviousCustomerOrders">0</span>
+                </button>
+            </div>
+            
+            <div class="form-group ">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" />
+                    <span class="input-group-btn">
+                        <button class="btn  btn-primary" type="button" id="btnApplyDiscount">
+                            <span class="glyphicon glyphicon-gbp"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group ">
+                <button type="button" class="btn btn-primary" id="btnPlaceOrder">Place order</button>
+                <button type="button" class="btn btn-link" id="btnPlaceOrderResetForm">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $('#viewPreviousOrders').click(function() {
+            var orders = $('#numberOfPreviousCustomerOrders').val();
+            if (orders <= 0) {
+                return;
+            }
+
+            var url = '@Url.Action("SearchOrder", "Order")?customerId=' + $('#customerId').val();
+
+            window.open(url, "popupWindow", "width=600,height=768,scrollbars=yes");
+        });
+
+        $('#btnPlaceOrder').click(function() {
+
+            makeAjaxCall('@Url.Action("PlaceOrder", "Order")', 'POST', function(d) {
+                $('#orderRowsHolder table').hide();
+                $('#orderRowsHolder #orderAlerts .alert').hide();
+                $('#orderRowsHolder #orderAlerts .alert-success').show();
+            }, function(d) {
+                $('#orderRowsHolder #orderAlerts .alert-danger').show();
+            }, {
+                customerId: $('#customerId').val()
+            });
+        });
+
+        $('#btnPlaceOrderResetForm').click(function() {
+            location.href = '@Url.Action("NewOrder", "Order")';
+        });
+
+        $('#previousOrdersDiv').hide();
+
+        $('#btnApplyDiscount').click(function() {
+
+            $.ajax({
+                url: '@Url.Action("ApplyDiscount", "Order")',
+                type: 'POST',
+                data: {
+                    discountRate: $('#discount').val()
+                },
+                success: function(data) {
+                    $('#orderRowsHolder').html(data);
+                },
+                fail: function(d) {
+                    // TODO: ADD ERROR ALERT
+                }
+            });
+        });
+
+        $('#btnAddNewCustomer').click(function() {
+            makeAjaxCall('@Url.Action("AddCustomer", "Customer")', 'GET', function(d) {
+                var modal = {
+                    title: 'Add new customer',
+                    body: d,
+                    buttons: [
+                        {
+                            name: 'Add customer',
+                            id: 'btnCreateCustomer',
+                            css: 'btn-primary',
+                            btntype: 'button',
+                            fireOnClick: function() {
+                                $('#newCustomerForm').data('bootstrapValidator').validate().isValid();
+                            }
+                        }
+                    ]
+                };
+
+                showDialog(modal);
+
+            }, function(d) {}, null);
+        });
+
+        liveSearchFor('@Url.Action("Search", "Customer")', '#customer', function(id, name) {
+            $('#customer').val('(' + id + ') - ' + name);
+            $('#customer').prop('readonly', true);
+            $('#customerId').val(id);
+
+            $.ajax({
+                url: '@Url.Action("GetPreviousOrdersCount", "Order")?customerId=' + id,
+                type: 'GET',
+                data: {
+                    customerId: id
+                },
+                success: function(d) {
+                    $('#numberOfPreviousCustomerOrders').html(d);
+                    $('#previousOrdersDiv').show();
+                },
+                fail: function(d) {
+                    //TODO: DO SOME ERROR MESSAGE;
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,160 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.ProductLine>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Order details
+    </div>
+    
+    <div class="panel-body">
+        
+        <div id="orderAlerts">
+            <div class="alert alert-success" role="alert">Order placed successfully</div>
+            <div class="alert alert-danger"  role="alert">An error occurred while placing an order. Please try again later.</div>
+        </div>
+        
+        <style type="text/css">
+            #orderAlerts .alert {
+                display: none;
+            }
+        </style>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Spice</th>
+                    <th>Product</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Total</th>
+                    
+                </tr>
+            </thead>
+            
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var prod in Model.Where(x => x.Id > 0))
+                    {
+                        var spciceDesc = string.Empty;
+                        
+                        <tr data-prod-id="@prod.Id">
+                            <td>
+                                @switch (prod.Spice)
+                                {
+                                    case 0:
+                                        spciceDesc = "Normal"; break;
+                                    case 1:
+                                        spciceDesc = "Hot"; break;
+                                    default:
+                                        spciceDesc = "Very hot"; break;
+                                }
+                                
+                                @if (prod.Spice != 0)
+                                {
+                                    <a href="#" class="btn btn-success btn-xs spice help-required" data-toggle="tooltip" title="Normal" data-spice="0"><span class="glyphicon glyphicon-fire"></span></a>
+                                }
+                                @if (prod.Spice != 1)
+                                {
+                                    <a href="#" class="btn btn-warning btn-xs spice help-required" data-toggle="tooltip" title="Hot" data-spice="1"><span class="glyphicon glyphicon-fire"></span></a>
+                                }
+                                @if (prod.Spice != 2)
+                                {
+                                    <a href="#" class="btn btn-danger btn-xs spice help-required" data-toggle="tooltip" title="Very hot" data-spice="2"><span class="glyphicon glyphicon-fire"></span></a>
+                                }
+                                
+                                @spciceDesc
+
+                            </td>
+                            <td>@prod.Name</td>
+                            <td class="text-right">£ @prod.Price</td>
+                            <td class="text-right">
+                                @prod.Quantity
+                                
+                                <a href="#" class="btn btn-success btn-xs incrementQuantity help-required" data-toggle="tooltip" title="Increase quantity by 1"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                                <a href="#" class="btn btn-info btn-xs decrementQuantity help-required" data-toggle="tooltip" title="Decrease quantity by 1"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                            </td>
+                            <th class="text-right">£ @prod.Total</th>
+                        </tr>
+                    }
+                </tbody>
+            }
+            
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var prod in Model.Where(x => x.Id <= 0).OrderBy(x=>x.Id ))
+                    {
+                        <tr data-prod-id="@prod.Id">
+                            <td></td>
+                            <td colspan="2">@prod.Name</td>
+                            <td class="text-right">@prod.Quantity</td>
+                            <th class="text-right">£ @prod.Total</th>
+                        </tr>
+                    }
+                </tbody>
+            }
+            
+        </table>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    function incrementOrDecrementQuantity(id, decrement) {
+
+        $.ajax({
+            url: '@Url.Action("AddNewProduct", "Order")',
+            type: 'POST',
+            data: {
+                productId: id,
+                decrement: decrement
+            },
+            success: function (data) {
+                $('#orderRowsHolder').html(data);
+            },
+            fail: function (d) {
+                // TODO: ADD ERROR ALERT
+            }
+        });
+    }
+
+    $(document).ready(function () {
+
+        $('.help-required').tooltip({
+            placement: 'top'
+        });
+
+        $('.incrementQuantity').click(function() {
+            var id = $(this).parent('td').parent('tr').attr('data-prod-id');
+            incrementOrDecrementQuantity(id);
+        });
+
+        $('.decrementQuantity').click(function() {
+            var id = $(this).parent('td').parent('tr').attr('data-prod-id');
+            incrementOrDecrementQuantity(id, true);
+        });
+
+        $('.spice').click(function () {
+            var id = $(this).parent('td').parent('tr').attr('data-prod-id');
+            var spice = $(this).attr('data-spice');
+
+            $.ajax({
+                url: '@Url.Action("ChangeSpcice", "Order")',
+                type: 'POST',
+                data: {
+                    productId: id,
+                    spice: spice
+                },
+                success: function (data) {
+                    $('#orderRowsHolder').html(data);
+                },
+                fail: function (d) {
+                    // TODO: ADD ERROR ALERT
+                }
+            });
+
+        });
+
+    });
+</script>

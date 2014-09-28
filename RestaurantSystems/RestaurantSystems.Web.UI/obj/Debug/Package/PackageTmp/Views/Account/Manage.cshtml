@@ -1,0 +1,18 @@
+﻿@using RestaurantSystems.Web.UI.Models;
+@using Microsoft.AspNet.Identity;
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+<div class="row">
+    <div class="col-md-12">
+        @(ViewBag.HasLocalPassword ? Html.Partial("_ChangePasswordPartial") : Html.Partial("_SetPasswordPartial"))
+
+        <section id="externalLogins">
+            @Html.Action("RemoveAccountList")
+
+            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })*@
+        </section>
+    </div>
+</div>
+

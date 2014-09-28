@@ -1,0 +1,178 @@
+﻿@using System
+@model System.Collections.Generic.IEnumerable<RestaurantSystems.Core.Entities.ProductEntity>
+
+
+
+@{
+    if (Model == null)
+    {
+        return;
+    }
+
+    var groups = Model.GroupBy(x => new { x.Category, x.CategoryId }, p => p, (key, g) => new { Category = key.Category, Id = key.CategoryId, Products = g.ToList() });
+  
+
+    var array = groups.ToArray();
+
+    const int CategeryPerWell = 8;
+
+    var cel = Math.Round((double)array.Count() / CategeryPerWell, 4);
+
+    var wells = (int)Math.Ceiling(cel);
+}
+
+
+<div id="productGroups">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Products
+        </div>
+
+        <div class="panel-body product-group">
+
+            @for (var i = 1; i <= wells; i++)
+            {
+                var startAt = (i - 1) * CategeryPerWell;
+                var endAt = (i * CategeryPerWell) - 1;
+
+                <div class="text-left panel-default panel-body">
+                    @for (var j = startAt; j <= endAt && j < array.Count(); j++)
+                    {
+                        <div class="btn-group">
+                            @*<button type="button"
+                                    class="btn btn-default  dropdown-toggle"
+                                    data-toggle="dropdown">
+                                @array[j].Category <span class="caret"></span>
+                            </button>*@
+                            
+                            <button type="button" class="btn btn-default">@array[j].Category</button>
+                            
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach (var prod in array[j].Products)
+                                {
+                                    <li>
+                                        <div data-prod-id="@prod.Id">
+                                            <div class="left">
+                                                <a href="#" class="product">
+                                                    @prod.LongName - £@prod.Price
+                                                </a>
+                                            </div>
+                                            <div class="right">
+                                                <button type="button" class="btn btn-default btn-xs">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                
+                                <li class="divider"></li>
+                                <li><a href="#" data-cat-id="@array[j].Id" class="product-add">Add</a></li>
+
+                            </ul>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="productModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Product</h4>
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="productSave">Save</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#productSave').click(function () {
+            $('.modal-body form').submit();
+        });
+
+        $('.product-group a.product').click(function (e) {
+            e.preventDefault();
+
+            // EDIT - PRODUCT
+            var id = $(this).attr('data-prod-id');
+
+            var url = '@Url.Action("ProductForm", "Product")?productId=' + id;
+            makeAjaxCall(url, 'GET', function(d) {
+                $('.modal-body').html(d);
+                $('.modal-title').html('Edit product');
+                $('#productModal').modal();
+            }, function(d) {});
+        });
+
+        $('.product-group button.product-remove').click(function (e) {
+            e.preventDefault();
+            // REMOVE - PRODUCT
+
+            var id = $(this).parent().parent().attr('data-id');
+
+            var url = '@Url.Action("DeleteProduct", "Product")';
+
+            makeAjaxCall(url, 'POST', function (d) { location.reload(); }, function (d) { }, { productId: id });
+        });
+
+        $('.product-group a.product-add').click(function (e) {
+            e.preventDefault();
+            // ADD - PRODUCT
+
+            var id = $(this).attr('data-cat-id');
+
+            var url = '@Url.Action("ProductForm", "Product")?productId=0&categoryId=' + id;
+
+            makeAjaxCall(url, 'GET', function (d) {
+                $('.modal-body').html(d);
+                $('.modal-title').html('New product');
+                $('#productModal').modal();
+            }, function (d) { }, null);
+        });
+    });
+</script>
+
+<style type="text/css">
+    
+    .img {
+        height: 20px;
+        margin-right: 5px;
+        width: 20px;
+    }
+
+    .left { float: left; }
+
+    .right { float: right; }
+
+    .product-add { }
+
+    .product { }
+
+    .product-remove { }
+</style>

@@ -1,0 +1,221 @@
+﻿<div class="panel panel-default">
+    
+    <div class="panel-heading">
+        <h5>New booking</h5>
+    </div>
+    
+    <div class="panel-body">
+        <form role="form" class="" method="POST" id="newBookingForm">
+            
+            <div class="form-group" id="bookingResult">
+                <div class="alert alert-success alert-dismissible" role="alert">Booking successful</div>
+                <div class="alert alert-danger " role="alert">Oops! something went wrong. Please try again later</div>
+            </div>
+
+            <div class="form-group">
+
+                <label for="from">From</label>
+                <div class='input-group date new-booking-date' id="fromDate">
+                    <input id="from" name="from" type='text' class="form-control" data-date-format="DD/MM/YYYY HH:mm" autocomplete="off" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span class="help-block" id="fromDateMessage"></span>
+                </div>
+
+            </div>
+            
+            <div class="form-group">
+
+                <label for="till">Till</label>
+                <div class='input-group date new-booking-date' id="toDate">
+                    <input id="till" name="till" type='text' class="form-control" data-date-format="DD/MM/YYYY HH:mm" autocomplete="off" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span class="help-block" id="tillDateMessage"></span>
+                </div>
+            
+            </div>
+
+            <div class="form-group">
+                <label for="customer">Customer</label>
+                <input type="hidden" class="form-control" id="customerId" name="customerId" />
+                
+                <div class="input-group">
+                    <input type="text" class="form-control" id="customer" name="customer" autocomplete="off" />
+                    
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="btnAddNewCustomer">
+                            <span class="glyphicon glyphicon-plus"></span>    
+                        </button>
+                    </span>    
+                </div>
+                
+                <span class="help-block" id="customerMessage"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="tableFor">Table for</label>
+                <input type="text" class="form-control" id="tableFor" name="tableFor" />
+                <span class="help-block" id="tableForMessage"></span>
+            </div>
+
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary" id="btnMakeBooking">Make booking</button>
+                <button type="button" class="btn btn-link" id="btnNewBookingResetForm">Reset</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<style type="text/css">
+    #bookingResult .alert { display: none; }
+</style>
+
+<script type="text/javascript">
+
+    function attachLiveSearch() {
+        liveSearchFor('@Url.Action("Search", "Customer")', '#customer', function(id, name) {
+            $('#customer').val('(' + id + ') - ' + name);
+            $('#customer').prop('readonly', true);
+            $('#customerId').val(id);
+            $('#btnAddNewCustomer').attr("disabled", true);
+        });
+    }
+
+    function resetForm() {
+        $('#newBookingForm').trigger("reset");
+        $('#newBookingForm').data('bootstrapValidator').resetForm();
+        $('#customer').prop('readonly', false);
+        $('#btnAddNewCustomer').attr("disabled", false);
+        attachLiveSearch();
+    }
+
+    $(document).ready(function() {
+
+        attachLiveSearch();
+
+        $('.new-booking-date').datetimepicker({
+            language: 'en'
+        });
+
+        $('#newBookingForm').submit(function(e) {
+            e.preventDefault();
+        });
+
+        $('#btnNewBookingResetForm').click(function() {
+            resetForm();
+        });
+
+        $('#btnAddNewCustomer').click(function() {
+            makeAjaxCall('@Url.Action("AddCustomer", "Customer")', 'GET', function(d) {
+                var modal = {
+                    title: 'Add new customer',
+                    body: d,
+                    buttons: [
+                        {
+                            name: 'Add customer',
+                            id: 'btnCreateCustomer',
+                            css: 'btn-primary',
+                            btntype: 'button',
+                            fireOnClick: function() {
+                                $('#newCustomerForm').data('bootstrapValidator').validate().isValid();
+                            }
+                        }
+                    ]
+                };
+
+                showDialog(modal);
+
+            }, function(d) {}, null);
+        });
+
+
+        $('#newBookingForm').bootstrapValidator({
+            excluded: [':disabled'],
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            live: 'enabled',
+            submitButtons: '#btnMakeBooking',
+            fields: {
+                from: {
+                    validators: {
+                        date: {
+                            format: 'DD/MM/YYYY HH:m',
+                            message: 'Please enter a valid from date'
+                        },
+                        stringLength: {
+                            max: 18,
+                            message: 'Date string cannot be more than 18 characters long'
+                        },
+                        notEmpty: {
+                            message: 'From date is required'
+                        }
+                    }
+                },
+                till: {
+                    validators: {
+                        date: {
+                            format: 'DD/MM/YYYY HH:m',
+                            message: 'Please enter a valid end date'
+                        },
+                        stringLength: {
+                            max: 18,
+                            message: 'Date string cannot be more than 18 characters long'
+                        },
+                        notEmpty: {
+                            message: 'Till date is required'
+                        }
+                    }
+                },
+                customer: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a customer this booking is for'
+                        },
+                        stringLength: {
+                            max: 50,
+                            message: 'Customer name cannot be greater than 50 charaters long'
+                        },
+                    }
+                },
+                tableFor: {
+                    validators: {
+                        integer: {
+                            message: 'Please enter valid number of people this table booking is for'
+                        },
+                        notEmpty: {
+                            message: 'Please enter the number of people this table booking is for'
+                        }
+                    }
+                },
+
+            },
+            onSuccess: function(e) {
+
+                $('#bookingResult .alert').hide();
+
+                makeAjaxCall('@Url.Action("SaveBooking", "Booking")', 'POST', function(d) {
+                    resetForm();
+                    $('#bookingResult .alert-success').show();
+                }, function(d) {
+                    $('#bookingResult .alert-danger').show();
+                }, {
+                    from: $('#fromDate').data("DateTimePicker").getDate().format('YYYY/MM/DDTHH:mm:ss'),
+                    till: $('#toDate').data("DateTimePicker").getDate().format('YYYY/MM/DDTHH:mm:ss'),
+                    customerId: $('#customerId').val(),
+                    tableFor: $('#tableFor').val()
+                });
+
+            }
+        });
+    });
+
+
+</script>

@@ -1,0 +1,33 @@
+﻿@using RestaurantSystems.Core.Entities;
+
+@model List<CustomerEntity>
+
+@if (Model == null || !Model.Any())
+{
+    return;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Address</th>
+            <th>Mobile</th>
+            <th>Telephone</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>@cust.FirstName</td>
+                <td>@cust.LastName</td>
+                <td>@cust.AddressLine1, @cust.AddressLine2, @cust.City, @cust.PostCode</td>
+                <td>@cust.MobilePhone</td>
+                <td>@cust.TelePhone</td>
+            </tr>
+        }
+    </tbody>
+</table>

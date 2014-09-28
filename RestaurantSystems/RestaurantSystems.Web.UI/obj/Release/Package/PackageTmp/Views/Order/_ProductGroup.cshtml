@@ -1,0 +1,80 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.ProductEntity>
+    
+@{
+    var groups = Model.GroupBy(x => x.Category, p => p, (key, g) => new { Category = key, Products = g.ToList() });
+
+    var array = groups.ToArray();
+
+    const int CategeryPerWell = 9;
+
+    var cel = Math.Round((double)array.Count() / CategeryPerWell, 4);
+
+    var wells = (int)Math.Ceiling(cel);
+}
+
+
+<div id="productGroups">
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Products
+        </div>
+        
+        <div class="panel-body">
+            
+            @for (var i = 1; i <= wells; i++)
+            {
+                var startAt = (i - 1) * CategeryPerWell;
+                var endAt = (i * CategeryPerWell) - 1;
+
+                <div class="text-left panel-default panel-body">
+                    @for (var j = startAt; j <= endAt && j < array.Count(); j++)
+                    {
+                        <div class="btn-group ">
+                            <button type="button" 
+                                    class="btn btn-default  dropdown-toggle" 
+                                    data-toggle="dropdown">
+                                @array[j].Category <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach (var prod in array[j].Products)
+                                {
+                                    <li>
+                                        <a href="#" data-prod-id="@prod.Id"  class="product">
+                                            @prod.LongName - £@prod.Price
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('.product').click(function() {
+            var id = $(this).attr('data-prod-id');
+    
+            $.ajax({
+                url: '@Url.Action("AddNewProduct", "Order")',
+                type: 'POST',
+                data: {
+                    productId: id
+                },
+                success: function (data) {
+                    $('#orderRowsHolder').html(data);
+                },
+                fail: function (d) {
+                    // TODO: ADD ERROR ALERT
+                }
+            });
+
+        });
+    });
+</script>

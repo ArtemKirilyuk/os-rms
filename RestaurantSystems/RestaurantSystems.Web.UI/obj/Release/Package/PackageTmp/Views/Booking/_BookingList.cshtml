@@ -1,0 +1,75 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>Till</th>
+            <th>Customer</th>
+            <th>Table for</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr class='@(booking.Cancelled ? "text-muted" : string.Empty)'>
+                <td>@booking.From.ToString("U")</td>
+                <td>@booking.Till.ToString("U")</td>
+                <td>@booking.CustomerName</td>
+                <td>@booking.TableFor</td>
+                <td>
+                    @if (booking.Cancelled)
+                    {
+                        <button type="button" class="btn btn-xs btn-warning btn-rebook" data-id="@booking.Id">
+                            Re-book
+                        </button>
+                    }
+                    else if (booking.Confirmed)
+                    {
+                    }
+                    else
+                    {
+                        <input type="button" class="btn btn-xs btn-primary btn-confirm" data-id="@booking.Id" value="Confirm" />
+                            
+                        <input type="button" class="btn btn-xs btn-danger btn-cancel" data-id="@booking.Id" value="Cancel" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+
+
+    function cancelBooking(id) {
+        var url = '@Url.Action("CancelBooking", "Booking")?bookingId=' & id;
+
+        makeAjaxCall(url, "POST", function () {
+            window.location.href = '@Url.Action("Index")';
+        }, null);
+    }
+
+    function confirmBooking(id) {
+        var url = '@Url.Action("ConfirmBooking", "Booking")?bookingId=' & id;
+
+        makeAjaxCall(url, "POST", function () {
+            window.location.href = '@Url.Action("Index")';
+        }, null);
+    }
+
+    $(document).ready(function() {
+        $('.btn-confirm').click(function() {
+            var id = $(this).attr('data-id');
+            confirmBooking(id);
+        });
+
+        $('.btn-cancel').click(function() {
+            var id = $(this).attr('data-id');
+            cancelBooking(id);
+        });
+    });
+
+
+</script>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.OrderHeaderEntity>
+
+<table class="table table-striped table-hover" id="tblOrderHeader">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="text-left">Order date</th>
+            <th>Customer</th>
+            <th class="text-right">Discount</th>
+            <th class="text-right">Total</th>
+        </tr>
+    </thead>
+    
+    @if (Model != null)
+    {
+        <tbody>
+            @foreach (var header in Model)
+            {
+                <tr data-header-id="@header.Id">
+                    <td>
+                        <button type="button" class="btn btn-default btn-xs print-order">
+                            <span class="glyphicon glyphicon-print"></span>
+                        </button>
+                    </td>
+                    <td class="text-left">@header.OrderDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                    <td>@header.FullName</td>
+                    <td class="text-right">£ @header.Discount</td>
+                    <td class="text-right">£ @header.Total</td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+
+
+<style type="text/css">
+    #tblOrderHeader tbody tr:hover { cursor: pointer; }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tblOrderHeader tbody tr').click(function () {
+            var id = $(this).attr('data-header-id');
+
+            $.ajax({
+                url: '@Url.Action("OrderDetail", "Order")',
+                type: 'GET',
+                data: {
+                    headerId: id
+                },
+                success: function (data) {
+                    $('#divOrderDetails').html(data);
+                },
+                fail: function (d) {
+                    
+                }
+            });
+        });
+    });
+</script>

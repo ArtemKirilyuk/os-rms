@@ -1,0 +1,26 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.OrderDetailEntity>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-left">Product</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Total</th>
+        </tr>
+    </thead>
+    @if (Model != null)
+    {
+        <tbody>
+            @foreach (var detail in Model)
+            {
+                <tr>
+                    <td class="text-left">@detail.Product (@detail.SpiceType)</td> 
+                    <td class="text-right">@detail.Quantity</td> 
+                    <td class="text-right">£ @detail.Price</td> 
+                    <td class="text-right">£ @detail.Total</td> 
+                </tr>
+            }
+        </tbody>
+    }
+</table>

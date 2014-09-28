@@ -22,25 +22,25 @@ SET IDENTITY_INSERT [dbo].[CustomerTypes] OFF
 SET IDENTITY_INSERT [dbo].[Customers] ON
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (1, 1, 'Abdul', 'Aziz', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (1, 1, 'Abdul', 'Aziz', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (2, 1, 'Penquin', 'Skipper', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (2, 1, 'Penquin', 'Skipper', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (3, 1, 'Penquin', 'Rico', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (3, 1, 'Penquin', 'Rico', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (4, 1, 'King', 'Julien XIII', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (4, 1, 'King', 'Julien XIII', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (5, 1, 'Penquin', 'Kowalski', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (5, 1, 'Penquin', 'Kowalski', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (6, 1, 'Penquin', 'Private', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (6, 1, 'Penquin', 'Private', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 INSERT INTO [dbo].[Customers]
            ([Id], [CustomerTypeId],[FirstName],[LastName],[AddressLine1],[AddressLine2],[PostCode],[MobilePhone],[TelePhone], [Disabled])
-     VALUES (7, 1, 'Madagascar', 'Maurice', '21 First Streest', 'Some Road',  'N1 0AB', '00000000000', NULL, 0)
+     VALUES (7, 1, 'Madagascar', 'Maurice', '21 First Streest', 'Some Road',  'NP12 6NX', '00000000000', NULL, 0)
 SET IDENTITY_INSERT [dbo].[Customers] OFF
 
 SET IDENTITY_INSERT [dbo].[BookingTypes] ON

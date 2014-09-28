@@ -1,0 +1,32 @@
+﻿@model IEnumerable<RestaurantSystems.Core.Entities.BookingEntity>
+
+<style type="text/css">
+    .btn-confirm { }
+
+    .btn-cancel { }
+
+    .btn-rebook { }
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-md-4 text-left">
+                <div class="heading">
+                    <h5>Booking search</h5>
+                </div>
+            </div>
+            <div class="col-md-8 text-right">@Html.Partial("_BookingSearch")</div>
+        </div>
+
+    </div>
+
+    <div class="panel-body" id="searchResultContainer">
+
+        @if (Model != null && Model.Any())
+        {
+            <text>@Html.Partial("_BookingList")</text>
+        }
+    </div>
+</div>

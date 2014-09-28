@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Customer";
+    ViewBag.SecondTitle = " search and add new customers";
+}
+
+<div class="row">
+    
+    <div class="col-md-3">
+        <div class="panel-default panel">
+            <div class="panel-heading">New customer</div>
+            <div class="panel-body">
+                @Html.Partial("_NewCustomer")
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <div class="panel-default panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                        <div class="heading">
+                            <h5>Customer search</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 text-right">@Html.Partial("_CustomerSearch")</div>
+                </div>
+            </div>
+
+            <div class="panel-body" id="customerSearchResult">
+                @Html.Partial("_CustomerList")
+            </div>
+        </div>
+    </div>
+
+</div>

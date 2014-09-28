@@ -1,0 +1,82 @@
+﻿<form role="form" method="POST" action="@Url.Action("Search", "Booking")" class="form-inline" id="searchForm">
+
+    
+    <div class='input-group date' id='datetimepicker2'>
+        <input id="from" name="from" type='text' class="form-control " data-date-format="DD/MM/YYYY HH:mm" value="@DateTime.Now.ToString("dd/MM/yyyy HH:mm")" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    
+    <div class="input-group">
+        <input type="text" class="form-control" id="customerSearchTxt" name="customer" placeholder="Customer name" />
+        <span class="input-group-btn">
+            <button class="btn  btn-primary" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+
+
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        
+        $('#datetimepicker2').datetimepicker({
+            language: 'en'
+        });
+
+        $('#searchForm').submit(function(e) {
+            e.preventDefault();
+        });
+
+
+        $('#searchForm').bootstrapValidator({
+            message: 'This value is not valid',
+            // group: '#searchForm',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            // container: 'popover',
+            live: 'enabled',
+            submitButtons: '#btnSearchBooking',
+            fields: {
+                from: {
+                    message: 'From date is required',
+                    validators: {
+                        date: {
+                            format: 'DD/MM/YYYY HH:m',
+                            message: 'The value is not a valid date'
+                        },
+                        stringLength: {
+                            max: 18,
+                            message: 'Date string cannot be more than 18 characters long'
+                        }
+                    }
+                },
+                customer: {
+                    validators: {
+                        stringLength: {
+                            max: 20,
+                            message: 'Maximum search text for customer is 20 characters long'
+                        }
+                    }
+                }
+            },
+            onSuccess: function (e) {
+                var url = '@Url.Action("Search", "Booking")?from=';
+                url += $('#searchForm #datetimepicker2').data("DateTimePicker").getDate().format('YYYY/MM/DTHH:mm:ss');
+                url += '&customer=';
+                url += $('#searchForm #customerSearchTxt').val();
+                
+                makeAjaxCall(url, "POST", function(data) {
+                    $('#searchResultContainer').html(data);
+                }, null);
+
+            }
+        });
+    });
+</script>

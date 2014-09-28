@@ -1,0 +1,7 @@
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\bin\Release\RestaurantSystems.Logs.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\bin\Release\RestaurantSystems.Logs.pdb
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\bin\Release\log4net.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\bin\Release\log4net.xml
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\obj\Release\RestaurantSystems.Logs.csprojResolveAssemblyReference.cache
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\obj\Release\RestaurantSystems.Logs.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Logs\obj\Release\RestaurantSystems.Logs.pdb

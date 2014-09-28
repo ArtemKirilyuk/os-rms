@@ -6,9 +6,9 @@
 //  *********************************************************************************************************************
 //   Assembly         : RestaurantSystems.Web.UI
 //   Author           : Abdul Aziz
-//   Created          : 14-08-2014
+//   Created          : 28-09-2014
 //   Last Modified By : Abdul Aziz
-//   Last Modified On : 08-09-2014
+//   Last Modified On : 28-09-2014
 //  *********************************************************************************************************************
 namespace RestaurantSystems.Web.UI.Controllers
 {
@@ -19,7 +19,7 @@ namespace RestaurantSystems.Web.UI.Controllers
     #endregion
 
     /// <summary>
-    /// The home controller.
+    ///     The home controller.
     /// </summary>
     [AllowAnonymous]
     public class HomeController : Controller
@@ -27,14 +27,25 @@ namespace RestaurantSystems.Web.UI.Controllers
         #region Public Methods and Operators
 
         /// <summary>
-        /// The index.
+        ///     The about.
         /// </summary>
         /// <returns>
-        /// The <see cref="ActionResult"/>.
+        ///     The <see cref="ActionResult" />.
+        /// </returns>
+        public ActionResult About()
+        {
+            return this.View("About");
+        }
+
+        /// <summary>
+        ///     The index.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="ActionResult" />.
         /// </returns>
         public ActionResult Index()
         {
-            return this.View();
+            return this.View("Index");
         }
 
         #endregion

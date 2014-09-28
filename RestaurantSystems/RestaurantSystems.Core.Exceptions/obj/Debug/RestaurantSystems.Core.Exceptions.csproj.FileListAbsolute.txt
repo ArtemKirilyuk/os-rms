@@ -1,0 +1,4 @@
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\bin\Debug\RestaurantSystems.Core.Exceptions.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\bin\Debug\RestaurantSystems.Core.Exceptions.pdb
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\obj\Debug\RestaurantSystems.Core.Exceptions.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\obj\Debug\RestaurantSystems.Core.Exceptions.pdb

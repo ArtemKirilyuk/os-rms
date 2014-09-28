@@ -1,0 +1,127 @@
+﻿<form role="form" method="POST"  class="form-inline" id="frmOrderSearch">
+    <input type="hidden" class="form-control" id="customerId" name="customerId" />
+
+  
+
+    <div class='input-group date' id='datetimepicker2'>
+        <input id="orderDate"
+               name="orderDate"
+               type='text' 
+               class="form-control form-control-static"
+               data-date-format="DD/MM/YYYY HH:mm"
+               value="@DateTime.Now.ToString("dd/MM/yyyy HH:mm")" />
+
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    
+
+    <div class="input-group">
+        <input type="text" 
+               class="form-control" 
+               id="customerDetails" 
+               name="customerDetails" 
+               autocomplete="off" 
+               placeholder="Customer" />
+
+        <span class="input-group-btn">
+            <button class="btn  btn-default" type="submit" id="btnSearchOrder">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+    
+    
+
+</form>
+
+<style type="text/css">
+    #orderDate { width: 200px !important; }
+</style>
+
+<script type="text/javascript">
+
+    function attachLiveSearch() {
+        liveSearchFor('@Url.Action("Search", "Customer")', '#customerDetails', function(id, name) {
+            $('#customerDetails').val('(' + id + ') - ' + name);
+            $('#customerId').val(id);
+        });
+    }
+
+    function resetForm() {
+        $('#frmOrderSearch').trigger("reset");
+        $('#frmOrderSearch').data('bootstrapValidator').resetForm();
+        attachLiveSearch();
+    }
+
+    $('#frmOrderSearch').submit(function(e) {
+        e.preventDefault();
+    });
+
+    $(document).ready(function() {
+
+        attachLiveSearch();
+
+        $('#datetimepicker2').datetimepicker({
+            language: 'en'
+        });
+
+        $('#frmOrderSearch').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            live: 'enabled',
+            submitButtons: '#btnSearchOrder',
+            fields: {
+                orderDate: {
+                    validators: {
+                        from: {
+                            format: 'DD/MM/YYYY HH:m',
+                            message: 'Please enter a valid from date'
+                        },
+                        stringLength: {
+                            max: 18,
+                            message: 'Date string cannot be more than 18 characters long'
+                        },
+                        notEmpty: {
+                            message: 'From date is required'
+                        }
+                    }
+                },
+                customer: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a customer this booking is for'
+                        },
+                        stringLength: {
+                            max: 50,
+                            message: 'Customer name cannot be greater than 50 charaters long'
+                        },
+                    }
+                }
+            },
+            onSuccess: function(e) {
+                $.ajax({
+                    url: '@Url.Action("OrderHeader", "Order")',
+                    type: 'GET',
+                    data: {
+                        placedOn: $('#datetimepicker2').data("DateTimePicker").getDate().format('YYYY/MM/DDTHH:mm:ss'),
+                        customerId: $('#customerId').val()
+                    },
+                    success: function(data) {
+                        resetForm();
+                        $('#divOrderHeader').html(data);
+                    },
+                    fail: function(d) {
+
+                    }
+                });
+            }
+        });
+    });
+
+</script>

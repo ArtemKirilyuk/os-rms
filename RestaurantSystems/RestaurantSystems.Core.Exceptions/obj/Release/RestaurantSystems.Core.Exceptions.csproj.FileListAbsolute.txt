@@ -1,0 +1,5 @@
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\bin\Release\RestaurantSystems.Core.Exceptions.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\bin\Release\RestaurantSystems.Core.Exceptions.pdb
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\obj\Release\RestaurantSystems.Core.Exceptions.csprojResolveAssemblyReference.cache
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\obj\Release\RestaurantSystems.Core.Exceptions.dll
+I:\VS Projects\TFS\MyProjs\RestaurantSystems\RestaurantSystems.Core.Exceptions\obj\Release\RestaurantSystems.Core.Exceptions.pdb
